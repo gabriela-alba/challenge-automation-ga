@@ -2,19 +2,16 @@ import { Then } from "@cucumber/cucumber";
 import { Given, When } from "./common-steps";
 import { expect, request } from "@playwright/test";
 import { config } from "../../../fixtures/setupEnv";
-import { readTestData } from "../../../utils/xlsx-reader";
-
-let testData: { id: number; name: string; abilities: string }[] = [];
-
-// Se leen los datos del archivo Excel
-When("se leen los datos del archivo excel Datos-pruebas.xlsx", async function () {
-  const filePath = "src/data/Datos-pruebas.xlsx";
-  testData = readTestData(filePath);
-  console.log(`Datos cargados desde Excel: ${JSON.stringify(testData, null, 2)}`);
-});
+import { getTestData } from "../../../utils/data-store"
 
 // Se realiza solicitudes GET al endpoint con ID o nombre del Pokemon
 When("se realiza solicitudes GET al endpoint con ID o nombre del Pokemon", async function () {
+  const testData = getTestData(); // Se obtiene los datos de prueba del módulo compartido
+  
+  if (!this.testData || this.testData.length === 0) {
+    throw new Error("No hay datos cargados desde el archivo Excel.");
+  }
+
   this.request = await request.newContext();
   this.responseData = []; // Inicializar el array de respuestas
 
@@ -35,10 +32,11 @@ When("se realiza solicitudes GET al endpoint con ID o nombre del Pokemon", async
       console.error(`Error: ${response.status()} - ${await response.text()}`);
     }
   }
+  console.log("Datos almacenados en responseData:", this.responseData);
 });
 
 Then("se valida que la respuesta se correcta para el Pokemon", async function () {
-  // Se verifica que hay datos de respuestas guardadas
+    // Se verifica que hay datos de respuestas guardadas
   if (!this.responseData || this.responseData.length === 0) {
     throw new Error("No se encontraron respuestas almacenadas.");
   }
@@ -48,17 +46,16 @@ Then("se valida que la respuesta se correcta para el Pokemon", async function ()
     console.log(`Validando respuesta para el Pokemon: ${name || id}`);
 
     // Se valida las habilidades si están en los datos de prueba
-    const testPokemon = testData.find((pokemon) => pokemon.id === id || pokemon.name === name.toLowerCase());
+    const testPokemon = this.testData.find((pokemon: { id: any; name: string; }) => pokemon.id === id || pokemon.name.toLowerCase() === name.toLowerCase());
     if (testPokemon && testPokemon.abilities) {
-      const expectedAbilities = testPokemon.abilities.split(", ").map((a) => a.toLowerCase());
+      const expectedAbilities = testPokemon.abilities.split(", ").map((a: string) => a.toLowerCase());
       const responseAbilities = body.abilities.map((a: any) => a.ability.name.toLowerCase());
 
       // Se valida que las habilidades esperadas coincidan con las de la respuesta
       expect(responseAbilities).toEqual(expect.arrayContaining(expectedAbilities));
-      console.log(`Habilidades válidadas para ${name || id}.`);
+      console.log(`Habilidades válidas para ${name || id}.`);
     }
 
-    // Se depura el tiempo de respuesta
     console.log(`Tiempo de respuesta para ${name || id}: ${responseTime} ms`);
     console.log(`Validación completada para el Pokemon: ${name || id}`);
   }
@@ -74,7 +71,7 @@ When("el tiempo de respuesta debe ser menor a 10s", async function () {
   // Se valida el tiempo de respuesta de cada Pokemon
   for (const { responseTime, id, name } of this.responseData) {
     console.log(`Validando tiempo de respuesta para ${name || id}: ${responseTime} ms`);
-    expect(responseTime).toBeLessThan(10000); // Se valida que el tiempo de respuesta sea menor a 10 segundos (10000 ms)
+    expect(responseTime).toBeLessThan(10000);
   }
 });
 
