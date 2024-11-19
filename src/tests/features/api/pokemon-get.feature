@@ -1,3 +1,4 @@
+@pokemon_get
 Feature: Validación de la API Pokemon
   
   Validar API usando datos de un archivo Excel para asegurar que la información del Pokemon es correcta y que los tiempos de respuesta son aceptables

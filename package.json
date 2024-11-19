@@ -5,7 +5,12 @@
   "scripts": {
     "report:json": "npx cucumber-js --config cucumber.json --format json:reports/cucumber.json",
     "report:html": "npx cucumber-js --config cucumber.json --format html:reports/cucumber-report.html",
-    "open:report": "open reports/cucumber-report.html"
+    "open:report": "open reports/cucumber-report.html",
+    "test:jsonplaceholder_post": "npx cucumber-js --tags @jsonplaceholder_post --config cucumber.json --format html:reports/cucumber-jsonplaceholder_post.html",
+    "test:pokemon_get": "npx cucumber-js --tags @pokemon_get --config cucumber.json --format html:reports/cucumber-pokemon_get.html",
+    "open:report:jsonplaceholder_post": "open reports/cucumber-jsonplaceholder_post.html",
+    "open:report:pokemon_get": "open reports/cucumber-pokemon_get.html",
+    "clean:reports": "rm -rf reports/*.html reports/*.json"
   },
   "keywords": [],
   "author": "",

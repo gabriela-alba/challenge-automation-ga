@@ -10,7 +10,7 @@
       "format": [
         "summary",
         "json:reports/cucumber.json",
-        "html:reports/cucumber-api-report.html"
+        "html:reports/cucumber-report.html"
       ],
       "paths": [
         "src/tests/features/api/*.feature",
