@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "types": ["node", "@cucumber/cucumber"],
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true
+  },
+  "include": [
+    "./src/tests/steps/**/*.ts",
+    "./src/tests/features/**/*.feature"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "challenge-automation-ga",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "report:json": "npx cucumber-js --config cucumber.json --format json:reports/cucumber.json",
+    "report:html": "npx cucumber-js --config cucumber.json --format html:reports/cucumber-report.html",
+    "open:report": "open reports/cucumber-report.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.0",
+    "@cucumber/html-formatter": "^21.7.0",
+    "@playwright/test": "^1.49.0",
+    "@types/cucumber": "^7.0.3",
+    "@types/node": "^22.9.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "xlsx": "^0.18.5"
+  }
+}
