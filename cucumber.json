@@ -2,7 +2,9 @@
     "default": {
       "require": [
         "src/tests/steps/api/*.ts",
-        "src/tests/steps/web/*.ts"
+        "src/tests/steps/web/*.ts",
+        "src/tests/hooks/**/*.ts",
+        "src/tests/world/**/*.ts"
       ],
       "requireModule": [
         "ts-node/register"

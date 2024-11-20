@@ -1,5 +1,5 @@
 import { Then } from "@cucumber/cucumber";
-import { Given, When } from "./common-steps";
+import { When } from "../common/common-steps";
 import { expect, request } from "@playwright/test";
 import { config } from "../../../fixtures/setupEnv";
 

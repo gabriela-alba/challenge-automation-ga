@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-// Cargar variables de entorno desde el archivo .env
+// Carga variables de entorno desde el archivo .env
 dotenv.config();
 
 if (!process.env.SECRET_KEY) {
@@ -15,9 +15,14 @@ if (!process.env.JSONPLACEHOLDER_URL) {
   throw new Error("JSONPLACEHOLDER_URL no está definida en el archivo .env");
 }
 
-// Exportar las variables de entorno
+if (!process.env.WIKI_URL) {
+  throw new Error("WIKI_URL no está definida en el archivo .env");
+}
+
+// Exporta las variables de entorno
 export const config = {
   secretKey: process.env.SECRET_KEY,
   apiURL: process.env.API_URL, 
   jsonplaceholderURL: process.env.JSONPLACEHOLDER_URL,
+  wikiURL: process.env.WIKI_URL
 };

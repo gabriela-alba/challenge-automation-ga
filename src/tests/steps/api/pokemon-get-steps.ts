@@ -1,12 +1,12 @@
 import { Then } from "@cucumber/cucumber";
-import { Given, When } from "./common-steps";
+import { When } from "../common/common-steps";
 import { expect, request } from "@playwright/test";
 import { config } from "../../../fixtures/setupEnv";
 import { getTestData } from "../../../utils/data-store"
 
 // Se realiza solicitudes GET al endpoint con ID o nombre del Pokemon
 When("se realiza solicitudes GET al endpoint con ID o nombre del Pokemon", async function () {
-  const testData = getTestData(); // Se obtiene los datos de prueba del módulo compartido
+  const testData = getTestData(); // Se obtiene los datos de prueba de 'data-store'
   
   if (!this.testData || this.testData.length === 0) {
     throw new Error("No hay datos cargados desde el archivo Excel.");
@@ -41,7 +41,7 @@ Then("se valida que la respuesta se correcta para el Pokemon", async function ()
     throw new Error("No se encontraron respuestas almacenadas.");
   }
 
-  // Se itera sobre las respuestas almacenadas
+  // Se itera sobre las respuestas guardadas
   for (const { id, name, body, responseTime } of this.responseData) {
     console.log(`Validando respuesta para el Pokemon: ${name || id}`);
 

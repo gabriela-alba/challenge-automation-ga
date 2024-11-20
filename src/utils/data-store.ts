@@ -1,4 +1,3 @@
-// Estructura de datos del test
 export interface PokemonTestData {
   id: number;
   name: string;
@@ -21,5 +20,6 @@ export function setTestData(data: PokemonTestData[]) {
  * @returns - Array de datos de prueba
  */
 export function getTestData(): PokemonTestData[] {
+  console.log("Datos de prueba almacenados:", testData);
   return testData;
 }
