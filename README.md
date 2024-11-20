@@ -7,7 +7,7 @@ Muchas gracias.
 
 ## Descripción del proyecto 📋
 
-Este proyecto contiene pruebas automatizadas tanto de API como de Web utilizando Playwright, TypeScript, y Cucumber.
+Este proyecto contiene pruebas automatizadas tanto de API como de Web utilizando Playwright, TypeScript y Cucumber.
 
 Con Cucumber, se estructuran las pruebas en formato BDD (Behavior-Driven Development) utilizando Gherkin, lo que permite escribir escenarios de prueba claros y comprensibles.
 El proyecto incluye la ejecución de pruebas por separado según los tags configurados, generación de reportes detallados, y validación de especificaciones específicas para cada prueba.
